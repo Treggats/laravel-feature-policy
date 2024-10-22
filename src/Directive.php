@@ -29,6 +29,7 @@ abstract class Directive implements DirectiveContract
     final public const CH_UA_WOW64 = 'ch-ua-wow64';
     final public const CROSS_ORIGIN_ISOLATED = 'cross-origin-isolated';
     final public const DISPLAY_CAPTURE = 'display-capture';
+    final public const INTEREST_COHORT = 'interest-cohort';
 
     /** @deprecated formerly in Chrome, behind a flag */
     final public const DOCUMENT_DOMAIN = 'document-domain';

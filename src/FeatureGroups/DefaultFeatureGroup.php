@@ -734,6 +734,32 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://chromestatus.com/feature/4590256452009984';
                 }
             },
+            Directive::INTEREST_COHORT => new class extends Directive {
+                public function name(): string
+                {
+                    return Directive::INTEREST_COHORT;
+                }
+
+                public function specificationName(): string
+                {
+                    return 'Interest Cohort';
+                }
+
+                public function specificationUrl(): string
+                {
+                    return 'https://patcg-individual-drafts.github.io/topics/';
+                }
+
+                public function browserSupport(): string
+                {
+                    return 'Chrome 89';
+                }
+
+                public function browserSupportUrl(): string
+                {
+                    return 'https://chromestatus.com/feature/5710139774468096';
+                }
+            },
             Directive::KEYBOARD_MAP => new class extends Directive {
                 public function name(): string
                 {
