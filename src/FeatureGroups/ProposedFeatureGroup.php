@@ -18,7 +18,7 @@ final class ProposedFeatureGroup implements FeatureGroupContract
 
     public static function directive(string $directive): DirectiveContract
     {
-        throw_unless(config('feature-policy.directives.proposal'), new DisabledFeatureGroupException($directive));
+        throw_unless(config('permissions-policy.directives.proposal'), new DisabledFeatureGroupException($directive));
 
         return match ($directive) {
             self::CLIPBOARD_READ => new class extends Directive {

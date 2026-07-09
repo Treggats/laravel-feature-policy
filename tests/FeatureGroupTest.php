@@ -27,7 +27,7 @@ final class FeatureGroupTest extends TestCase
             }
         };
 
-        config()->set('feature-policy.policy', $policy::class);
+        config()->set('permissions-policy.policy', $policy::class);
 
         $this->get('test-route')
             ->assertHeaderMissing('Permissions-Policy');
@@ -43,8 +43,8 @@ final class FeatureGroupTest extends TestCase
             }
         };
 
-        config()->set('feature-policy.policy', $policy::class);
-        config()->set('feature-policy.directives.proposal', true);
+        config()->set('permissions-policy.policy', $policy::class);
+        config()->set('permissions-policy.directives.proposal', true);
 
         $this->get('test-route')
             ->assertHeader('Permissions-Policy');

@@ -4,7 +4,7 @@ return [
     'enabled' => env('FPH_ENABLED', true),
 
     /*
-     * A policy will determine which Feature-Policy headers will be set.
+     * A policy will determine which Permissions-Policy headers will be set.
      * A valid policy extends `Mazedlx\FeaturePolicy\Policies\Policy`
      */
     'policy' => Mazedlx\FeaturePolicy\Policies\Basic::class,

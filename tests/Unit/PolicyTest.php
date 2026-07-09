@@ -22,7 +22,7 @@ final class PolicyTest extends TestCase
                 $this->addDirective(Directive::CAMERA, Value::NONE);
             }
         };
-        config()->set('feature-policy.policy', $policy::class);
+        config()->set('permissions-policy.policy', $policy::class);
         $policy->configure();
 
         $this->assertSame('camera=()', (string) $policy);
@@ -37,7 +37,7 @@ final class PolicyTest extends TestCase
                 //
             }
         };
-        config()->set('feature-policy.policy', $policy::class);
+        config()->set('permissions-policy.policy', $policy::class);
         $policy->configure();
 
         $this->assertEmpty((string) $policy);
@@ -52,7 +52,7 @@ final class PolicyTest extends TestCase
                 $this->addDirective(Directive::CAMERA, Value::SELF);
             }
         };
-        config()->set('feature-policy.policy', $policy::class);
+        config()->set('permissions-policy.policy', $policy::class);
 
         $response = new Response();
 
@@ -74,7 +74,7 @@ final class PolicyTest extends TestCase
                 //
             }
         };
-        config()->set('feature-policy.policy', $policy::class);
+        config()->set('permissions-policy.policy', $policy::class);
 
         $this->assertEmpty((string) $policy);
 

@@ -39,7 +39,7 @@ abstract class Policy implements PolicyContract
 
     public function shouldBeApplied(Request $request, Response $response): bool
     {
-        return config('feature-policy.enabled');
+        return config('permissions-policy.enabled');
     }
 
     public function applyTo(Response $response): void
@@ -56,13 +56,13 @@ abstract class Policy implements PolicyContract
 
         $response->headers->set($headerName, (string) $this);
 
-        if (! config('feature-policy.reporting.enabled')) {
+        if (! config('permissions-policy.reporting.enabled')) {
             return;
         }
 
-        $response->headers->set('Reporting-Endpoints', 'violation-reports="' . config('feature-policy.reporting.url') . '"');
+        $response->headers->set('Reporting-Endpoints', 'violation-reports="' . config('permissions-policy.reporting.url') . '"');
 
-        if (! config('feature-policy.reporting.report_only')) {
+        if (! config('permissions-policy.reporting.report_only')) {
             return;
         }
 

@@ -30,7 +30,7 @@ final class AddFeaturePolicyHeaders
             return $policies;
         }
 
-        $policyClass = config('feature-policy.policy');
+        $policyClass = config('permissions-policy.policy');
 
         if (! empty($policyClass)) {
             $policies->push(PolicyFactory::create($policyClass));

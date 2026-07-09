@@ -24,7 +24,7 @@ final class AddFeaturePolicyHeadersTest extends TestCase
     public function it_wont_set_headers_if_it_is_not_enabled_in_the_config(): void
     {
         config([
-            'feature-policy.enabled' => false,
+            'permissions-policy.enabled' => false,
         ]);
 
         $this->get('test-route')->assertHeaderMissing('Permissions-Policy');
@@ -43,7 +43,7 @@ final class AddFeaturePolicyHeadersTest extends TestCase
             }
         };
 
-        config()->set('feature-policy.policy', $policy::class);
+        config()->set('permissions-policy.policy', $policy::class);
 
         $this->get('test-route')
             ->assertHeader('Permissions-Policy', 'camera=("src-1" "src-2"),fullscreen=("src-3" "src-4")');
@@ -59,7 +59,7 @@ final class AddFeaturePolicyHeadersTest extends TestCase
             }
         };
 
-        config()->set('feature-policy.policy', $policy::class);
+        config()->set('permissions-policy.policy', $policy::class);
 
         $this->get('test-route')
             ->assertHeader('Permissions-Policy', 'camera=("src-1" "src-2")');
@@ -75,7 +75,7 @@ final class AddFeaturePolicyHeadersTest extends TestCase
             }
         };
 
-        config()->set('feature-policy.policy', $policy::class);
+        config()->set('permissions-policy.policy', $policy::class);
 
         $this->get('test-route')
             ->assertHeader('Permissions-Policy', 'camera=self');
@@ -91,7 +91,7 @@ final class AddFeaturePolicyHeadersTest extends TestCase
             }
         };
 
-        config()->set('feature-policy.policy', $policy::class);
+        config()->set('permissions-policy.policy', $policy::class);
 
         $this->get('test-route')
             ->assertHeader('Permissions-Policy', 'camera=("src-1" self "src-2")');
@@ -107,7 +107,7 @@ final class AddFeaturePolicyHeadersTest extends TestCase
             }
         };
 
-        config()->set('feature-policy.policy', $policy::class);
+        config()->set('permissions-policy.policy', $policy::class);
 
         $this->get('test-route')
             ->assertHeader('Permissions-Policy', 'camera=self');
@@ -123,7 +123,7 @@ final class AddFeaturePolicyHeadersTest extends TestCase
             }
         };
 
-        config()->set('feature-policy.policy', $policy::class);
+        config()->set('permissions-policy.policy', $policy::class);
 
         $this->get('test-route')
             ->assertHeader('Permissions-Policy', 'camera=()');
@@ -139,7 +139,7 @@ final class AddFeaturePolicyHeadersTest extends TestCase
             }
         };
 
-        config()->set('feature-policy.policy', $policy::class);
+        config()->set('permissions-policy.policy', $policy::class);
 
         $this->get('test-route')
             ->assertHeader('Permissions-Policy', 'camera=*');
@@ -167,7 +167,7 @@ final class AddFeaturePolicyHeadersTest extends TestCase
     #[Test]
     public function it_can_enable_reporting_of_permission_violations(): void
     {
-        config()->set('feature-policy.reporting.enabled', true);
+        config()->set('permissions-policy.reporting.enabled', true);
 
         $policy = new class extends Policy {
             public function configure(): void
@@ -176,11 +176,11 @@ final class AddFeaturePolicyHeadersTest extends TestCase
             }
         };
 
-        config()->set('feature-policy.policy', $policy::class);
+        config()->set('permissions-policy.policy', $policy::class);
 
         $response = $this->get('test-route')->assertSuccessful();
 
-        $response->assertHeader('Reporting-Endpoints', 'violation-reports="' . config('feature-policy.reporting.url') . '"');
+        $response->assertHeader('Reporting-Endpoints', 'violation-reports="' . config('permissions-policy.reporting.url') . '"');
         $response->assertHeader('Permissions-Policy', 'camera=*; report-to=violation-reports');
 
         $response->assertHeaderMissing('Permissions-Policy-Report-Only');
@@ -189,8 +189,8 @@ final class AddFeaturePolicyHeadersTest extends TestCase
     #[Test]
     public function it_can_enable_report_only_permission_violations(): void
     {
-        config()->set('feature-policy.reporting.enabled', true);
-        config()->set('feature-policy.reporting.report_only', true);
+        config()->set('permissions-policy.reporting.enabled', true);
+        config()->set('permissions-policy.reporting.report_only', true);
 
         $policy = new class extends Policy {
             public function configure(): void
@@ -199,11 +199,11 @@ final class AddFeaturePolicyHeadersTest extends TestCase
             }
         };
 
-        config()->set('feature-policy.policy', $policy::class);
+        config()->set('permissions-policy.policy', $policy::class);
 
         $response = $this->get('test-route')->assertSuccessful();
 
-        $response->assertHeader('Reporting-Endpoints', 'violation-reports="' . config('feature-policy.reporting.url') . '"');
+        $response->assertHeader('Reporting-Endpoints', 'violation-reports="' . config('permissions-policy.reporting.url') . '"');
         $response->assertHeader('Permissions-Policy', 'camera=*; report-to=violation-reports');
         $response->assertHeader('Permissions-Policy-Report-Only', 'camera=*; report-to=violation-reports');
 

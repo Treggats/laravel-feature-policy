@@ -31,7 +31,7 @@ final class PolicyFormatter implements FormatContract
             })
             ->implode(',');
 
-        if (config('feature-policy.reporting.enabled')) {
+        if (config('permissions-policy.reporting.enabled')) {
             $policy .= '; report-to=violation-reports';
         }
 
